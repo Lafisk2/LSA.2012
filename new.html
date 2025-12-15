@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOS - Social Battle Royale Game</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #0c0f17;
+            color: #ffffff;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: #0c0f17;
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #1f2430;
+        }
+        
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: #ff4655;
+            letter-spacing: 1px;
+        }
+        
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        .main-nav li {
+            margin-left: 40px;
+        }
+        
+        .main-nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .main-nav a:hover {
+            color: #ff4655;
+        }
+        
+        .buy-btn {
+            background-color: #ff4655;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .buy-btn:hover {
+            background-color: #e03e4c;
+        }
+        
+        /* Hero section */
+        .hero {
+            background: linear-gradient(rgba(12, 15, 23, 0.9), rgba(12, 15, 23, 0.9)), 
+                        url('https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 180px 0 100px;
+            text-align: center;
+            margin-top: 70px;
+        }
+        
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 900px;
+            margin: 0 auto 40px;
+            color: #cccccc;
+        }
+        
+        .steam-price {
+            background-color: rgba(255, 255, 255, 0.1);
+            display: inline-block;
+            padding: 15px 35px;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .steam-price span {
+            color: #ff4655;
+        }
+        
+        .ar-signature {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff4655;
+            margin-top: 10px;
+        }
+        
+        /* What is SOS section */
+        .what-is-sos {
+            padding: 100px 0;
+            background-color: #131722;
+        }
+        
+        .section-title {
+            font-size: 36px;
+            margin-bottom: 60px;
+            text-align: center;
+            position: relative;
+            color: #ffffff;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background-color: #ff4655;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .sos-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+        
+        .sos-text {
+            flex: 1;
+        }
+        
+        .sos-text h3 {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #ff4655;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .sos-text h3:before {
+            content: '<一';
+            position: absolute;
+            left: -60px;
+            color: #666;
+        }
+        
+        /* Underline for The Story */
+        .story-title {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .story-title:after {
+            content: '';
+            position: absolute;
+            width: 1000px;
+            height: 3px;
+            background-color: white;
+            bottom: -10px;
+            left: 0;
+        }
+        
+        .sos-text p {
+            font-size: 18px;
+            color: #aaaaaa;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .sos-image {
+            flex: 1;
+            height: 350px;
+            background-color: #1a1f2e;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #555;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .sos-image:before {
+            content: 'FEATURES';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 14px;
+            color: #ff4655;
+            font-weight: bold;
+        }
+        
+        /* Features section */
+        .features {
+            padding: 100px 0;
+            background-color: "itog/image (3).png";
+        }
+        
+        .features-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            align-items: flex-end;
+            max-width: 600px;
+            margin-left: 50%;
+        }
+        
+        .feature-card {
+            padding: 40px 30px;
+            border-radius: 5px;
+            transition: transform 0.3s;
+            width: 100%;
+            max-width: 600px;
+        }
+        .feature-card1 {
+            padding: 20px 30px;
+            border-radius: 5px;
+            transition: transform 0.3s;
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 50px;
+            color: #ff4655;
+            margin-bottom: 25px;
+        }
+        
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+        
+        .feature-card p {
+            color: #aaaaaa;
+            font-size: 16px;
+        }
+        
+        /* System requirements */
+        .system-reqs {
+            padding: 100px 0;
+            background-color: "itog/image (2).png";
+        }
+
+        
+        .reqs-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            /*gap: 40px;*/
+            margin-top: 50px;
+            width: 50%;
+            margin-left: 0;
+        }
+        
+        .req-category {
+            margin-bottom:0;
+            padding: 20px;
+            border: 1px solid #2a2f3e;
+            border-radius: 5px;
+            position: relative;
+        }
+        
+        .req-category:not(:last-child) {
+            margin-bottom: 20px;
+        }
+        
+        .req-category + .req-category {
+            border-top: 1px solid #2a2f3e;
+        }
+        
+        .req-title {
+            font-size: 18px;
+            color: #ff4655;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .req-details {
+            color: #cccccc;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+        
+        /* Quotes section */
+        .quotes {
+            padding: 100px 0;
+            background-color: #0c0f17;
+        }
+        
+        .quote-header {
+            margin-bottom: 60px;
+        }
+        
+        .quote-header h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .quote-header p {
+            color: #aaaaaa;
+            max-width: 700px;
+            margin: 0 0 20px 0;
+            font-size: 16px;
+            text-align: left;
+        }
+        
+        .quotes-container {
+            display: flex;
+            gap: 60px;
+            align-items: flex-start;
+        }
+        
+        .quotes-text {
+            flex: 1;
+        }
+        
+        .quotes-grid {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .quote-card {
+            background-color: #131722;
+            padding: 30px;
+            border-radius: 5px;
+            margin-left: 200px;
+        }
+        .quote-card1{
+            background-color: #131722;
+            padding: 30px;
+            border-radius: 5px;
+            margin-right: 200px;
+        }
+        
+        .quote-author {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            background-color: #1a1f2e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff4655;
+            margin-right: 15px;
+        }
+        
+        .author-info h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            color: #888;
+            font-size: 14px;
+        }
+        
+        .quote-text {
+            color: #cccccc;
+            font-style: italic;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        /* Newsletter*/
+        .newsletter {
+            padding: 80px 0;
+            background-color: #131722;
+        }
+        
+        .newsletter-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-image {
+            flex: 0 0 300px;
+        }
+        
+        .newsletter-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        
+        .newsletter-text {
+            flex: 1;
+            text-align: left;
+        }
+        
+        .newsletter h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        
+        .newsletter p {
+            color: #aaaaaa;
+            margin-bottom: 40px;
+            font-size: 16px;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            gap: 10px;
+        }
+        
+        .email-input {
+            flex: 1;
+            padding: 18px 20px;
+            background-color: #1a1f2e;
+            border: none;
+            border-radius: 3px;
+            color: white;
+            font-size: 16px;
+        }
+        
+        .subscribe-btn {
+            background-color: #ff4655;
+            color: white;
+            border: none;
+            padding: 18px 30px;
+            font-weight: bold;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 16px;
+            white-space: nowrap;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #0a0d14;
+            padding: 50px 0 30px;
+            border-top: 1px solid #1f2430;
+        }
+        
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff4655;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .footer-links a {
+            color: #888;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #ff4655;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            padding-top: 20px;
+            border-top: 1px solid #1f2430;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .reqs-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .sos-content,
+            .quotes-container,
+            .newsletter-content {
+                flex-direction: column;
+            }
+            
+            .header-inner {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .main-nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .main-nav li {
+                margin: 0 15px 10px;
+            }
+            
+            .hero {
+                padding: 150px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 42px;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .subscribe-btn {
+                padding: 18px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .newsletter-content {
+                gap: 20px;
+            }
+            
+            .newsletter-image {
+                flex: 0 0 250px;
+            }
+            
+            .footer-top {
+                flex-direction: column;
+                gap: 25px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">SOS</div>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="#main">MAIN</a></li>
+                        <li><a href="#about">ABOUT</a></li>
+                        <li><a href="#features">GAME FEATURES</a></li>
+                        <li><a href="#requirements">SYSTEM REQUIREMENTS</a></li>
+                        <li><a href="#quotes">QUOTES</a></li>
+                    </ul>
+                </nav>
+                <button class="buy-btn">
+                    <i class="fas fa-shopping-cart" style="margin-right: 8px;"></i>Buy now
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="main">
+        <div class="container">
+            <h1>SOCIAL BATTLE<br>ROYALE GAME</h1>
+            <p>Each round, you and 15 other contestants compete to escape a deadly island filled with monsters. The trick is: three people can survive. Will you run solo or form friendships with others to escape?</p>
+            <div class="steam-price">Buy now on Steam | <span>$14.99</span></div>
+            <p>Making the right decisions could be the difference between life and death.</p>
+            <div class="ar-signature">-AR</div>
+        </div>
+    </section>
+
+    <!-- What is SOS Section -->
+    <section class="what-is-sos" id="about">
+        <div class="container">
+            <h2 class="section-title">WHAT IS SOS?</h2>
+            <div class="sos-content">
+                <div class="sos-text">
+                    <h3 class="story-title">THE STORY</h3>
+                    <p>You have 30 minutes to find a relic, signal for extraction, and grab one of three spots on the rescue chopper.</p>
+                    <p>CREATE ALLIES AND ENEMIES<br>IMPRESS THE AUDIENCE</p>
+                    <p>SOS is a 16-player competitive survival game where players must escape an island filled with monsters. Only three can survive each round. The game emphasizes social interaction, betrayal, and strategic alliances.</p>
+                </div>
+                <div class="sos-image">
+                    <div style="text-align: center;">
+                        <div style="font-size: 48px; color: #ff4655; margin-bottom: 15px;"><i class="fas fa-gamepad"></i></div>
+                        <div style="color: #aaa; font-size: 14px;">WHAT'S SO SPECIAL?</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">WHAT'S SO SPECIAL?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-skull-crossbones"></i></div>
+                    <h3>SURVIVE AT ALL COSTS</h3>
+                    <p>You have 30 minutes to find a relic, signal for extraction, and grab one of three spots on the rescue chopper.</p>
+                </div>
+                <div class="feature-card1">
+                    <div class="feature-icon"><i class="fas fa-handshake"></i></div>
+                    <h3>CREATE ALLIES AND ENEMIES</h3>
+                </div>
+                <div class="feature-card1">
+                    <div class="feature-icon"><i class="fas fa-users"></i></div>
+                    <h3>IMPRESS THE AUDIENCE</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- System Requirements -->
+    <section class="system-reqs" id="requirements">
+        <div class="container">
+            <h2 class="section-title">CAN MY COMPUTER RUN THIS GAME?</h2>
+            <div class="reqs-container">
+                <div class="req-category">
+                    <div class="req-title">OS:</div>
+                    <div class="req-details">Windows 7 64-bit only<br>(No OSX support at this time)</div>
+                </div>
+                <div class="req-category">
+                    <div class="req-title">PROCESSOR:</div>
+                    <div class="req-details">Intel Core 2 Duo @ 2.4 GHZ or<br>AMD Athlon X2 @ 2.8 GHZ</div>
+                </div>
+                <div class="req-category">
+                    <div class="req-title">MEMORY:</div>
+                    <div class="req-details">8 GB RAM</div>
+                </div>
+                <div class="req-category">
+                    <div class="req-title">STORAGE:</div>
+                    <div class="req-details">8 GB available space</div>
+                </div>
+                <div class="req-category">
+                    <div class="req-title">GRAPHICS:</div>
+                    <div class="req-details">NVIDIA GeForce GTX 660 2GB or<br>AMD Radeon HD 7850 2GB<br>DirectX11 (Shader Model 5)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quotes Section -->
+    <section class="quotes" id="quotes">
+        <div class="container">
+            <div class="quotes-container">
+                <div class="quotes-text">
+                    <h2>WHAT PEOPLE THINK?</h2>
+                    <p>Our goal is to create a product and service that you're satisfied with and use it every day. This is why we're constantly working on our services to make it better every day and really listen to what our users has to say.</p>
+                    <p style="color: #ff4655; font-weight: bold;">Read more testimonials</p>
+                </div>
+                <div class="quotes-grid">
+                    <div class="quote-card">
+                        <div class="quote-author">
+                            <div class="author-avatar">E</div>
+                            <div class="author-info">
+                                <h4>EVAN LAHTI</h4>
+                                <p>PC Gamer</p>
+                                <p>October 18, 2018</p>
+                            </div>
+                        </div>
+                        <div class="quote-text">"One of my gaming highlights of the year."</div>
+                    </div>
+                    <div class="quote-card1">
+                        <div class="quote-author">
+                            <div class="author-avatar">J</div>
+                            <div class="author-info">
+                                <h4>JADA GRIFFIN</h4>
+                                <p>Nerdreactor</p>
+                                <p>December 21, 2018</p>
+                            </div>
+                        </div>
+                        <div class="quote-text">"The next big thing in the world of streaming and survival games."</div>
+                    </div>
+                    <div class="quote-card">
+                        <div class="quote-author">
+                            <div class="author-avatar">A</div>
+                            <div class="author-info">
+                                <h4>AARON WILLIAMS</h4>
+                                <p>Uproxx</p>
+                                <p>December 24, 2018</p>
+                            </div>
+                        </div>
+                        <div class="quote-text">"Snoop Dogg Playing The Wildly Entertaining 'SOS' Is Ridiculous."</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <div class="newsletter-image">
+                    <img src="itog/image (1).png" alt="Newsletter image">
+                </div>
+                <div class="newsletter-text">
+                    <h2>WANT TO STAY IN TOUCH?</h2>
+                    <p>In order to start receiving our news, all you have to do is enter your email address. Everything else will be taken care of by us. We will send you emails containing information about game. We don't spam.</p>
+                    <form class="newsletter-form">
+                        <input type="email" class="email-input" placeholder="Your email address" required>
+                        <button type="submit" class="subscribe-btn">Subscribe now</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-logo">SOS</div>
+                <div class="footer-links">
+                    <a href="#">PRIVACY POLICY</a>
+                    <a href="#">TERMS OF SERVICES</a>
+                    <a href="#">CODE OF CONDUCT</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                © 2018 Outpost Games, Inc. All Rights Reserved
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Buy button functionality
+        document.querySelector('.buy-btn').addEventListener('click', function() {
+            alert('Redirecting to Steam store page...');
+        });
+        
+        // Newsletter form submission
+        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('.email-input').value;
+            if(email) {
+                alert(`Thank you for subscribing! Confirmation sent to ${email}`);
+                this.reset();
+            }
+        });
+        
+        // Update header on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if(window.scrollY > 100) {
+                header.style.backgroundColor = 'rgba(12, 15, 23, 0.98)';
+            } else {
+                header.style.backgroundColor = '#0c0f17';
+            }
+        });
+        
+        // Add icons dynamically
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create Font Awesome link if not present
+            if(!document.querySelector('link[href*="font-awesome"]')) {
+                const link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
+                document.head.appendChild(link);
+            }
+        });
+    </script>
+</body>
+</html>
